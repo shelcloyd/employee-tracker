@@ -1,6 +1,7 @@
 const express = require("express");
 const { default: inquirer } = require("inquirer");
 const mysql = require("mysql2");
+// const Connection = require("mysql2/typings/mysql/lib/Connection");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -31,6 +32,7 @@ function start(){
             type: 'list',
             message: 'Choose an option below'
             choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role']
+            name: 'options'
         }
     ]).then(function(res) {
         switch(res.start){
@@ -60,3 +62,11 @@ function start(){
         }
     });
 };
+
+function viewDepartment(){
+    Connection.createQuery('SELECT department_name AS department FROM department LEFT JOIN department', function(err, results){
+        if(err) throw err;
+        console.table(results);
+        start();
+    });
+}
