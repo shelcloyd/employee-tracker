@@ -24,7 +24,7 @@ VALUES (1, 'Sales Agent', 50000, 'Sales'),
     (13, 'Merchandising Manager', 45000, 'Recieving'),
     (14, 'Human Resourses Agent', 40000, 'Human Resources'),
     (15, 'Human Resources Manager', 60000, 'Human Resources'),
-    (16, 'CEO', 150000, 'Upper Management')
+    (16, 'CEO', 150000, 'Upper Management');
 
     INSERT INTO employee (id, first_name, last_name, job_title, department_name, salary, manager_id)
     VALUES (1, 'Shel', 'Cloyd', 'Graphic Designer', 'Graphic Design', 60000, 7),
