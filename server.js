@@ -2,7 +2,6 @@ const express = require("express");
 const inquirer = require('inquirer');
 const mysql = require("mysql2");
 const table = require('console.table');
-const Connection = require("mysql2/typings/mysql/lib/Connection");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -97,7 +96,7 @@ function addDepartment() {
                 name: 'department'
             }
         ]).then(function (answer) {
-            Connection.query(
+            database.query(
                 'INSERT INTO department VALUES (DEFAULT, ?)',
                 [answer.department],
                 function (err) {
@@ -140,7 +139,7 @@ function addRole() {
                 name: 'department_id'
             }
         ]).then(function (answer) {
-            Connection.query(
+            database.query(
                 'INSERT INTO role SET ?',
                 {
                     job_title: answer.role,
@@ -157,7 +156,7 @@ function addRole() {
 };
 
 function addEmployee() {
-    Connection.query('SELECT * FROM role', function (err, results) {
+    database.query('SELECT * FROM role', function (err, results) {
         if (err) throw err;
         inquirer
             .prompt([
@@ -196,7 +195,7 @@ function addEmployee() {
                     name: 'manager_id'
                 },
             ]).then(function (answer) {
-                Connection.query(
+                database.query(
                     'INSERT INTO employee SET ?',
                     {
                         first_name: answer.first_name,
@@ -212,7 +211,7 @@ function addEmployee() {
 };
 
 function updateEmployee() {
-    Connection.query('SELECT * FROM employee', function (err, results) {
+    database.query('SELECT * FROM employee', function (err, results) {
         if (err) throw err;
         inquirer
             .prompt([
@@ -230,7 +229,7 @@ function updateEmployee() {
                 }
             ]).then(function (answer) {
                 const employee = answer.employee;
-                Connection.query('SELECT * FROM employee', function (err, results) {
+                database.query('SELECT * FROM employee', function (err, results) {
                     if (err) throw err;
                     inquirer
                         .prompt([
@@ -247,7 +246,7 @@ function updateEmployee() {
                                 name: 'role'
                             }
                         ]).then(function (answer) {
-                            Connection.query('UPDATE employee SET ? WHERE last_name = ?',
+                            database.query('UPDATE employee SET ? WHERE last_name = ?',
                                 [
                                     {
                                         job_title: answer.role,
