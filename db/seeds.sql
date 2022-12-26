@@ -31,4 +31,4 @@ VALUES (1, 'Sales Agent', 50000, 'Sales'),
         (2, 'Kyle', 'Biem', 'Sales Manager', 'Sales', 80000, 16),
         (3, 'Blake', 'Whitlock', 'Shipper', 'Shipping', 30000, 11),
         (4, 'Michael', 'Burge', 'Human Resources Manager', 'Human Resources', 60000, 16),
-        (5, 'Don', "O'linn", 'CEO', 'Upper Management', 150000, 16);
+        (5, 'Don', "O'linn", 'CEO', 'Upper Management', 150000, null);

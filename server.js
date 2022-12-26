@@ -71,7 +71,7 @@ function viewDepartment() {
     });
 };
 
-function viewRoles() {
+function viewRole() {
     database.createQuery('SELECT * FROM role', function (err, results) {
         if (err) throw err;
         console.table(results);
@@ -117,20 +117,26 @@ function addRole() {
                 name: 'role'
             },
             {
-                type: 'input',
-                message: 'Salary amount?',
-                name: 'salary',
+                type: 'number',
                 validate: function (value) {
                     if (isNaN(value) === false) {
                         return true;
                     }
                     return false;
-                }
+                },
+                message: 'Salary amount?',
+                name: 'salary',
             },
             {
-                type: 'input',
+                type: 'number',
+                validate: function (value) {
+                    if (isNaN(value) === false) {
+                        return true;
+                    }
+                    return false;
+                },
                 message: 'What department will this role be a part of?',
-                name: 'department_name'
+                name: 'department_id'
             }
         ]).then(function (answer) {
             connection.query(
@@ -138,7 +144,7 @@ function addRole() {
                 {
                     job_title: answer.role,
                     salary: answer.salary,
-                    department_name: answer.department_name
+                    department_id: answer.department_id
                 },
                 function (err) {
                     if (err) throw err;
@@ -174,7 +180,7 @@ function addEmployee() {
                         return roleArray;
                     },
                     message: 'Job title?',
-                    name: 'role'
+                    name: 'job_title'
                 },
                 {
                     type: 'number',
@@ -183,9 +189,7 @@ function addEmployee() {
                             return true;
                         }
                         return false;
-                    }
-                },
-                {
+                    },
                     message: 'Manager ID?',
                     default: '1',
                     name: 'manager_id'
@@ -196,7 +200,7 @@ function addEmployee() {
                     {
                         first_name: answer.first_name,
                         last_name: answer.last_name,
-                        job_title: answer.role,
+                        job_title: answer.job_title,
                         manager_id: answer.manager_id
                     }
                 )
