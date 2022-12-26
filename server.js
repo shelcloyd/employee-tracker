@@ -64,9 +64,25 @@ function start(){
 };
 
 function viewDepartment(){
-    Connection.createQuery('SELECT department_name AS department FROM department LEFT JOIN department', function(err, results){
+    database.createQuery('SELECT * FROM department', function(err, results){
         if(err) throw err;
         console.table(results);
         start();
     });
-}
+};
+
+function viewRoles(){
+    database.createQuery('SELECT * FROM role', function(err, results){
+        if(err) throw err;
+        console.table(results);
+        start();
+    });
+};
+
+function viewEmployee(){
+    database.createQuery('SELECT * FROM employee', function(err, results){
+        if(err) throw err;
+        console.table(results);
+        start();
+    });
+};
