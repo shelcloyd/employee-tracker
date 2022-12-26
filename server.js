@@ -102,7 +102,28 @@ function addDepartment(){
             [answer.department],
             function(err){
                 if(err) throw err;
-                console.log('Department ' + answer.department + ' has been added.');
+                console.log('Department ' + answer.department + ' added to list.');
+                start();
+            }
+        )
+    });
+};
+
+function addRole(){
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: 'Role name?',
+            name: 'role'
+        }
+    ]).then(function(answer){
+        connection.query(
+            'INSERT INTO role VALUES (DEFAULT, ?',
+            [answer.role],
+            function(err){
+                if(err) throw err;
+                console.log('Role ' + answer.role + ' added to list.');
                 start();
             }
         )
