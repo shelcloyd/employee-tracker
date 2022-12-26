@@ -1,12 +1,12 @@
 INSERT INTO department (id, department_name)
-VALUES ('Sales'),
-    (1, 'Marketing'),
-    (2, 'Graphic Design'),
-    (3, 'Customer Service'),
-    (4, 'Shipping'),
-    (5, 'Recieving'),
-    (6, 'Human Resources'),
-    (7, 'Upper Management');
+VALUES (1, 'Sales'),
+    (2, 'Marketing'),
+    (3, 'Graphic Design'),
+    (4, 'Customer Service'),
+    (5, 'Shipping'),
+    (6, 'Recieving'),
+    (7, 'Human Resources'),
+    (8, 'Upper Management');
 
 INSERT INTO role (id, job_title, salary, department_name)
 VALUES (1, 'Sales Agent', 50000, 'Sales'),
@@ -31,4 +31,4 @@ VALUES (1, 'Sales Agent', 50000, 'Sales'),
         (2, 'Kyle', 'Biem', 'Sales Manager', 'Sales', 80000, 16),
         (3, 'Blake', 'Whitlock', 'Shipper', 'Shipping', 30000, 11),
         (4, 'Michael', 'Burge', 'Human Resources Manager', 'Human Resources', 60000, 16),
-        (5, 'Don', "O'linn", 'CEO', 'Upper Management', 150000, null);
+        (5, 'Don', "O'linn", 'CEO', 'Upper Management', 150000, 0);

@@ -1,6 +1,7 @@
 const express = require("express");
-const { default: inquirer } = require("inquirer");
+const inquirer = require('inquirer');
 const mysql = require("mysql2");
+const table = require('console.table');
 const Connection = require("mysql2/typings/mysql/lib/Connection");
 
 const PORT = process.env.PORT || 3001;
