@@ -34,10 +34,16 @@ VALUES
         'Customer Service'
     ),
     (
-        14,
+        4,
         'HR Manager',
-        0000,
+        60000,
         'Human Resources'
+    ),
+    (
+        5,
+        'Manager',
+        100000,
+        'Management'
     );
 
 INSERT INTO

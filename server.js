@@ -35,7 +35,7 @@ function start() {
                 name: 'options'
             }
         ]).then(function (res) {
-            switch (res.start) {
+            switch (res.options) {
                 case 'View all departments':
                     viewDepartment();
                     break;
@@ -64,7 +64,7 @@ function start() {
 };
 
 function viewDepartment() {
-    database.createQuery('SELECT * FROM department', function (err, results) {
+    database.query('SELECT * FROM department', function (err, results) {
         if (err) throw err;
         console.table(results);
         start();
@@ -72,7 +72,7 @@ function viewDepartment() {
 };
 
 function viewRole() {
-    database.createQuery('SELECT * FROM role', function (err, results) {
+    database.query('SELECT * FROM role', function (err, results) {
         if (err) throw err;
         console.table(results);
         start();
@@ -80,7 +80,7 @@ function viewRole() {
 };
 
 function viewEmployee() {
-    database.createQuery('SELECT * FROM employee', function (err, results) {
+    database.query('SELECT * FROM employee', function (err, results) {
         if (err) throw err;
         console.table(results);
         start();
@@ -124,19 +124,13 @@ function addRole() {
                     }
                     return false;
                 },
-                message: 'Salary amount?',
+                message: 'Annual salary?',
                 name: 'salary',
             },
             {
-                type: 'number',
-                validate: function (value) {
-                    if (isNaN(value) === false) {
-                        return true;
-                    }
-                    return false;
-                },
+                type: 'input',
                 message: 'What department will this role be a part of?',
-                name: 'department_id'
+                name: 'department_name'
             }
         ]).then(function (answer) {
             database.query(
@@ -144,7 +138,7 @@ function addRole() {
                 {
                     job_title: answer.role,
                     salary: answer.salary,
-                    department_id: answer.department_id
+                    department_name: answer.department_name
                 },
                 function (err) {
                     if (err) throw err;
@@ -211,24 +205,24 @@ function addEmployee() {
 };
 
 function updateEmployee() {
-    database.query('SELECT * FROM employee', function (err, results) {
+    database.query('SELECT * FROM employee', function(err, results){
         if (err) throw err;
         inquirer
             .prompt([
                 {
                     type: 'rawlist',
                     choices: function () {
-                        let employeeArray = [];
-                        for(i = 0; i < results.length; i++){
-                            employeeArray.push(results[i].last_name);
+                        let nameArray = [];
+                        for (i = 0; i < results.length; i++) {
+                            nameArray.push(results[i].last_name);
                         }
-                        return employeeArray;
+                        return nameArray;
                     },
                     message: 'Which employee would you like to update?',
                     name: 'employee'
                 }
             ]).then(function (answer) {
-                const employee = answer.employee;
+                const saveEmployee = answer.choices;
                 database.query('SELECT * FROM employee', function (err, results) {
                     if (err) throw err;
                     inquirer
@@ -243,17 +237,17 @@ function updateEmployee() {
                                     return roleArray;
                                 },
                                 message: 'Select job title.',
-                                name: 'role'
+                                name: 'job_title'
                             }
                         ]).then(function (answer) {
                             database.query('UPDATE employee SET ? WHERE last_name = ?',
                                 [
                                     {
-                                        job_title: answer.role,
-                                    },
+                                        job_title: answer.job_title,
+                                    }, saveEmployee
                                 ],
                             ),
-                                console.log('Employee rold updated.');
+                                console.log('Employee role updated.');
                             start();
                         });
                 })
