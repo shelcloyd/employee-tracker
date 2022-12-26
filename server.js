@@ -97,7 +97,7 @@ function addDepartment() {
                 name: 'department'
             }
         ]).then(function (answer) {
-            connection.query(
+            Connection.query(
                 'INSERT INTO department VALUES (DEFAULT, ?)',
                 [answer.department],
                 function (err) {
@@ -140,7 +140,7 @@ function addRole() {
                 name: 'department_id'
             }
         ]).then(function (answer) {
-            connection.query(
+            Connection.query(
                 'INSERT INTO role SET ?',
                 {
                     job_title: answer.role,
@@ -157,7 +157,7 @@ function addRole() {
 };
 
 function addEmployee() {
-    connection.query('SELECT * FROM role', function (err, results) {
+    Connection.query('SELECT * FROM role', function (err, results) {
         if (err) throw err;
         inquirer
             .prompt([
@@ -196,7 +196,7 @@ function addEmployee() {
                     name: 'manager_id'
                 },
             ]).then(function (answer) {
-                connection.query(
+                Connection.query(
                     'INSERT INTO employee SET ?',
                     {
                         first_name: answer.first_name,
@@ -212,7 +212,7 @@ function addEmployee() {
 };
 
 function updateEmployee() {
-    connection.query('SELECT * FROM employee', function (err, results) {
+    Connection.query('SELECT * FROM employee', function (err, results) {
         if (err) throw err;
         inquirer
             .prompt([
@@ -230,7 +230,7 @@ function updateEmployee() {
                 }
             ]).then(function (answer) {
                 const employee = answer.employee;
-                connection.query('SELECT * FROM employee', function (err, results) {
+                Connection.query('SELECT * FROM employee', function (err, results) {
                     if (err) throw err;
                     inquirer
                         .prompt([
@@ -247,7 +247,7 @@ function updateEmployee() {
                                 name: 'role'
                             }
                         ]).then(function (answer) {
-                            connection.query('UPDATE employee SET ? WHERE last_name = ?',
+                            Connection.query('UPDATE employee SET ? WHERE last_name = ?',
                                 [
                                     {
                                         job_title: answer.role,
