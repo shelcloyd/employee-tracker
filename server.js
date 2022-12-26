@@ -102,7 +102,7 @@ function addDepartment(){
             [answer.department],
             function(err){
                 if(err) throw err;
-                console.log('Department ' + answer.department + ' added to list.');
+                console.log('Department, ' + answer.department + ', added to list.');
                 start();
             }
         )
@@ -123,7 +123,28 @@ function addRole(){
             [answer.role],
             function(err){
                 if(err) throw err;
-                console.log('Role ' + answer.role + ' added to list.');
+                console.log('Role, ' + answer.role + ', added to list.');
+                start();
+            }
+        )
+    });
+};
+
+function addEmployee(){
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: 'Employee name?',
+            name: 'employee'
+        }
+    ]).then(function(answer){
+        connection.query(
+            'INSERT INTO employee VALUES (DEFAULT, ?)',
+            [answer.employee],
+            function(err){
+                if(err) throw err;
+                console.log('Employee, ' + answer.employee + ', added to list.');
                 start();
             }
         )
