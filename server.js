@@ -1,6 +1,7 @@
 const express = require("express");
 const { default: inquirer } = require("inquirer");
 const mysql = require("mysql2");
+const Connection = require("mysql2/typings/mysql/lib/Connection");
 // const Connection = require("mysql2/typings/mysql/lib/Connection");
 
 const PORT = process.env.PORT || 3001;
@@ -84,5 +85,26 @@ function viewEmployee(){
         if(err) throw err;
         console.table(results);
         start();
+    });
+};
+
+function addDepartment(){
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: 'Department name?',
+            name: 'department'
+        }
+    ]).then(function(answer){
+        connection.query(
+            'INSERT INTO department VALUES (DEFAULT, ?)',
+            [answer.department],
+            function(err){
+                if(err) throw err;
+                console.log('Department ' + answer.department + ' has been added.');
+                start();
+            }
+        )
     });
 };
