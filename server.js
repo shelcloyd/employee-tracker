@@ -2,7 +2,6 @@ const express = require("express");
 const { default: inquirer } = require("inquirer");
 const mysql = require("mysql2");
 const Connection = require("mysql2/typings/mysql/lib/Connection");
-// const Connection = require("mysql2/typings/mysql/lib/Connection");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -216,7 +215,7 @@ function updateEmployee() {
                     type: 'rawlist',
                     choices: function () {
                         let employeeArray = [];
-                        for (i = 0, i < results.length; i++) {
+                        for(i = 0; i < results.length; i++){
                             employeeArray.push(results[i].last_name);
                         }
                         return employeeArray;
@@ -234,7 +233,7 @@ function updateEmployee() {
                                 type: 'rawlist',
                                 choices: function () {
                                     let roleArray = [];
-                                    for (i = 0, i < results.length, i++) {
+                                    for (i = 0; i < results.length; i++) {
                                         roleArray.push(results[i].job_title)
                                     }
                                     return roleArray;
